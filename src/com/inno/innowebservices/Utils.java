@@ -18,11 +18,19 @@ public class Utils {
 		UserPojo up = new UserPojo();
 		try {
 			Entity e = ds.get(id);
-			up.setId(e.getProperty("UserId").toString());
+			
 			up.setName(e.getProperty("username").toString());
 			up.setPassword(e.getProperty("password").toString());
 			up.setEmail(e.getProperty("email").toString());
 			up.setAge(e.getProperty("age").toString());
+			up.setGender(e.getProperty("gender").toString());
+			up.setSmoker(e.getProperty("smoker").toString());
+			up.setAddress(e.getProperty("address").toString());
+			up.setLiscence(e.getProperty("liscence").toString());
+			up.setPhone(e.getProperty("phone").toString());
+			up.setMusic(e.getProperty("music").toString());
+			up.setInterest(e.getProperty("interest").toString());
+			up.setAbout(e.getProperty("about").toString());
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

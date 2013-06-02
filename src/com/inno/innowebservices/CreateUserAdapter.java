@@ -14,9 +14,9 @@ public CreateUserResponse createUser(CreateUser request){
 	String password = request.getArg2();
 	String email = request.getArg3();
 	String date = request.getArg4();
-	boolean b = wd.createUser(id, name, password, email, date);
+	//boolean b = wd.createUser(id, name, password, email, date);
 	CreateUserResponse res = new CreateUserResponse();
-	res.setReturn(b);
+	//res.setReturn(b);
 	return res;
 }
 

@@ -11,17 +11,26 @@ import com.google.appengine.api.datastore.KeyFactory;
 @WebService
 public class WebservicesDemo {
 	@WebMethod
-	public boolean createUser(String userId, String username, String password, String email, String age){
-		Entity employee = new Entity("Employee",userId);
-		employee.setProperty("UserID", userId);
-		employee.setProperty("username", username);
-		employee.setProperty("password",password);
-		employee.setProperty("email", email);
-		employee.setProperty("age", age);
+	public boolean createUser(String userId, String username, String password, String email, String age, String gender, String smoker,
+			String address, String phone, String music, String interest, String about){
+		Entity user = new Entity("Employee",username);
+		
+		user.setProperty("username", username);
+		user.setProperty("password",password);
+		user.setProperty("email", email);
+		user.setProperty("age", age);
+		user.setProperty("gender", gender);
+		user.setProperty("smoker", smoker);
+		user.setProperty("address", address);
+		user.setProperty("phone", phone);
+		user.setProperty("music", music);
+		user.setProperty("interest", interest);
+		user.setProperty("about", about);
+		
 		
 		System.out.println("USERID" + userId);
 		
-		Utils.upadeEntity(employee);
+		Utils.upadeEntity(user);
 		return true;
 	}
 	
