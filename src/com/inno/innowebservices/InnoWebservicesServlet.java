@@ -27,7 +27,7 @@ public class InnoWebservicesServlet extends HttpServlet {
 		    		  out.println(
 				                
 		    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
-		    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "suscuss" +"\"" + "\n"  +
+		    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + "\n"  +
 		    						  
 				                
 				                "\t"+ "\"" + "user" +"\"" + ": { \n" +
@@ -35,7 +35,7 @@ public class InnoWebservicesServlet extends HttpServlet {
 				                "\t\t"+  "\"" + "email" +"\""+ ":" +   "\"" +  up.getEmail() +"\"" + "\n"  +
 				                "\t\t"+  "\"" + "age" +"\"" +  ":" +  "\"" +  up.getAge() +"\"" + "\n"  +
 				                "\t\t"+  "\"" + "gender" +"\"" +  ":" +  "\"" + up.getGender() +"\"" + "\n"+   
-				                "\t\t"+  "\"" + "liscence" +"\"" +  ":" + "\"" + up.getLiscence() +"\"" +"\n"+  
+				                "\t\t"+  "\"" + "licence" +"\"" +  ":" + "\"" + up.getLiscence() +"\"" +"\n"+  
 				                "\t\t"+  "\"" + "smoker" +"\"" +  ":" +  "\"" + up.getSmoker() +"\"" +"\n"  +
 				                "\t\t"+  "\"" + "Address" +"\"" +  ":" + "\"" + up.getAddress() +"\"" +"\n" + 
 				                "\t\t"+  "\"" + "phone" +"\"" +  ":" +  "\"" + up.getPhone() +"\"" +  "\n"  +
