@@ -6,8 +6,13 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 
 @SuppressWarnings("serial")
 public class InnoWebservicesServlet extends HttpServlet {
@@ -27,21 +32,23 @@ public class InnoWebservicesServlet extends HttpServlet {
 		    		  out.println(
 				                
 		    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
-		    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "suscuss" +"\"" + "\n"  +
+		    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
 		    						  
 				                
 				                "\t"+ "\"" + "user" +"\"" + ": { \n" +
-				                "\t\t"+  "\"" + "user_name" +"\"" + ":" +  "\"" + up.getName() +"\"" + "\n"  +
-				                "\t\t"+  "\"" + "email" +"\""+ ":" +   "\"" +  up.getEmail() +"\"" + "\n"  +
-				                "\t\t"+  "\"" + "age" +"\"" +  ":" +  "\"" +  up.getAge() +"\"" + "\n"  +
-				                "\t\t"+  "\"" + "gender" +"\"" +  ":" +  "\"" + up.getGender() +"\"" + "\n"+   
-				                "\t\t"+  "\"" + "liscence" +"\"" +  ":" + "\"" + up.getLiscence() +"\"" +"\n"+  
-				                "\t\t"+  "\"" + "smoker" +"\"" +  ":" +  "\"" + up.getSmoker() +"\"" +"\n"  +
-				                "\t\t"+  "\"" + "Address" +"\"" +  ":" + "\"" + up.getAddress() +"\"" +"\n" + 
-				                "\t\t"+  "\"" + "phone" +"\"" +  ":" +  "\"" + up.getPhone() +"\"" +  "\n"  +
-				                "\t\t"+  "\"" + "music" +"\"" +  ":" + "\"" + up.getMusic() +"\"" +  "\n"  +
-				                "\t\t"+  "\"" + "interest" +"\"" + ":" +  "\"" +up.getInterest() +"\"" +  "\n"+  
-				                "\t\t"+  "\"" + "about" +"\"" +  ":" + "\"" + up.getAbout() +"\"" +  "\n" +
+				                "\t\t"+  "\"" + "user_name" +"\"" + ":" +  "\"" + up.getName() +"\"" + ", \n"  +
+				                "\t\t"+  "\"" + "email" +"\""+ ":" +   "\"" +  up.getEmail() +"\"" + ", \n"  +
+				                "\t\t"+  "\"" + "age" +"\"" +  ":" +  "\"" +  up.getAge() +"\"" + ", \n"  +
+				                "\t\t"+  "\"" + "gender" +"\"" +  ":" +  "\"" + up.getGender() +"\"" + ", \n"+   
+				                "\t\t"+  "\"" + "licence" +"\"" +  ":" + "\"" + up.getLiscence() +"\"" +", \n"+  
+				                "\t\t"+  "\"" + "smoker" +"\"" +  ":" +  "\"" + up.getSmoker() +"\"" +", \n"  +
+				                "\t\t"+  "\"" + "TransMissionAuto" +"\"" +  ":" +  "\"" + up.getTransAuto() +"\"" +", \n"  +
+				                "\t\t"+  "\"" + "TransMissionManual" +"\"" +  ":" +  "\"" + up.getTransMan() +"\"" +", \n"  +
+				                "\t\t"+  "\"" + "Address" +"\"" +  ":" + "\"" + up.getAddress() +"\"" +", \n" + 
+				                "\t\t"+  "\"" + "phone" +"\"" +  ":" +  "\"" + up.getPhone() +"\"" +  ", \n"  +
+				                "\t\t"+  "\"" + "music" +"\"" +  ":" + "\"" + up.getMusic() +"\"" +  ", \n"  +
+				                "\t\t"+  "\"" + "interest" +"\"" + ":" +  "\"" +up.getInterest() +"\"" +  ", \n"+  
+				                "\t\t"+  "\"" + "about" +"\"" +  ":" + "\"" + up.getAbout() +"\"" +  " \n" +
 				                "} \n"+
 				                "} }"
 				                
@@ -70,7 +77,25 @@ public class InnoWebservicesServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req,
               HttpServletResponse resp)
 throws ServletException, IOException {
+		boolean error = false;
+		String errorname= "";
 		  UserPojo pj = new UserPojo();
+		  DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+		  
+		  /**
+		   * Checking to see if the username already exsist in the databse
+		   */
+		  Query q = new Query("name");
+		  PreparedQuery p = dstore.prepare(q);
+		  
+		  for (Entity e: p.asIterable()){
+			  if (e.getProperty("username").equals(req.getParameter("user")))
+				  error = true;
+			  	   errorname = "User already exist";
+		  }
+		  
+		  if(!error){
+		  
 			pj.setName(req.getParameter("user"));
 			pj.setPassword(req.getParameter("pass"));
 			pj.setEmail(req.getParameter("email"));
@@ -78,6 +103,8 @@ throws ServletException, IOException {
 			pj.setGender(req.getParameter("gen"));
 			pj.setLiscence(req.getParameter("lis"));
 			pj.setSmoker(req.getParameter("smo"));
+			pj.setTransAuto(req.getParameter("transAuto"));
+			pj.setTransMan(req.getParameter("transMan"));
 			pj.setAddress(req.getParameter("add"));
 			pj.setPhone(req.getParameter("phone"));
 			pj.setMusic(req.getParameter("music"));
@@ -88,37 +115,27 @@ throws ServletException, IOException {
 			
 			
 			 PrintWriter out = resp.getWriter();
-			    String title = "\"" + "user_response" +"\"" + ": { \n" ;
+			    String title = "Register_response" ;
 			    out.println(
 			                
-			                title +
+			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
+				    				
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful		" +"\"" + "\n"  + 
+							   "} }"
+				                
+				                );
+		  }
+		  else{
+			  PrintWriter out = resp.getWriter();
+			    String title = "Register_response" ;
+			    out.println(
 			                
-			                "\t"+ "\"" + "user" +"\"" + ": { \n" +
-			                "\t\t"+  "\"" + "user_name" +"\"" +  "\"" + "" +"\"" +  
-			                 req.getParameter("user") + "\n" +
-			                "  <LI>param2: "
-			                + req.getParameter("pass") + "\n" +
-			                "  <LI>param3: "
-			                + req.getParameter("email") + "\n" +
-			                "  <LI>param4: "
-			                + req.getParameter("age") + "\n" +
-			                 req.getParameter("gen") + "\n" +
-			                "  <LI>param5: "
-			                + req.getParameter("lis") + "\n" +
-			                "  <LI>param6: "
-			                + req.getParameter("smo") + "\n" +
-			                "  <LI>param7: "
-			                + req.getParameter("add") + "\n" +
-			                "  <LI>param8: "
-			                + req.getParameter("phone") + "\n" +
-			                "  <LI>param9: "
-			                + req.getParameter("music") + "\n" +
-			                "  <LI>param10: "
-			                + req.getParameter("int") + "\n" +
-			                "  <LI>param11: "
-			                + req.getParameter("about") + "\n" +
-			                
-			                "</UL>\n" +
-			                "</BODY></HTML>");
+			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
+				    				
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + errorname + " "  + "\"" + "\n"  + 
+							   "} }"
+				                
+				                );
+		  }
 }
 }

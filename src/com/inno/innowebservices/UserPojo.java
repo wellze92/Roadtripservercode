@@ -10,12 +10,14 @@ public class UserPojo {
 	private String age;
 	private String smoker;
 	private String address;
+	private String transAuto;
 	private String liscence;
 	private String phone;
 	private String music;
 	private String interest;
 	private String about;
 	private String gender;
+	private String transMan;
 	
 	
 	public String getName() {
@@ -102,6 +104,8 @@ Entity user = new Entity("id",name);
 		user.setProperty("lis", liscence);
 		user.setProperty("smoker", smoker);
 		user.setProperty("address", address);
+		user.setProperty("transAuto",transAuto);
+		user.setProperty("transMan",transMan);
 		user.setProperty("phone", phone);
 		user.setProperty("music", music);
 		user.setProperty("interest", interest);
@@ -109,5 +113,17 @@ Entity user = new Entity("id",name);
 		
 		Utils.upadeEntity(user);
 		return true;
+	}
+	public String getTransAuto() {
+		return transAuto;
+	}
+	public void setTransAuto(String transmission) {
+		this.transAuto = transmission;
+	}
+	public String getTransMan() {
+		return transMan;
+	}
+	public void setTransMan(String transMan) {
+		this.transMan = transMan;
 	}
 }

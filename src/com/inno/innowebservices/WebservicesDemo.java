@@ -11,7 +11,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 @WebService
 public class WebservicesDemo {
 	@WebMethod
-	public boolean createUser(String userId, String username, String password, String email, String age, String gender, String smoker,
+	public boolean createUser(String userId, String username, String password, String email, String transmission, String age, String gender, String smoker,
 			String address, String phone, String music, String interest, String about){
 		Entity user = new Entity("Employee",username);
 		
@@ -22,6 +22,7 @@ public class WebservicesDemo {
 		user.setProperty("gender", gender);
 		user.setProperty("smoker", smoker);
 		user.setProperty("address", address);
+		user.setProperty("transmssion", transmission);
 		user.setProperty("phone", phone);
 		user.setProperty("music", music);
 		user.setProperty("interest", interest);

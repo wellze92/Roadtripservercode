@@ -26,6 +26,8 @@ public class Utils {
 			up.setGender(e.getProperty("gender").toString());
 			up.setSmoker(e.getProperty("smoker").toString());
 			up.setAddress(e.getProperty("address").toString());
+			up.setTransAuto(e.getProperty("transAuto").toString());
+			up.setTransMan(e.getProperty("transMan").toString());
 			up.setLiscence(e.getProperty("lis").toString());
 			up.setPhone(e.getProperty("phone").toString());
 			up.setMusic(e.getProperty("music").toString());
