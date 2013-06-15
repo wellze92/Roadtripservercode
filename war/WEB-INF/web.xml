@@ -8,9 +8,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>InnoWebservices</servlet-name>
 		<servlet-class>com.inno.innowebservices.InnoWebservicesServlet</servlet-class>
 	</servlet>
+	<servlet>
+	    <servlet-name>ListingServlet</servlet-name>
+	    <servlet-class>com.inno.innowebservices.ListingServlet</servlet-class>
+	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>InnoWebservices</servlet-name>
 		<url-pattern>/innowebservices</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>ListingServlet</servlet-name>
+	    <url-pattern>/ListingServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
