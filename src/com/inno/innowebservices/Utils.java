@@ -10,8 +10,10 @@ import com.google.appengine.api.datastore.Key;
 
 public class Utils {
 
-	private static DatastoreService ds = DatastoreServiceFactory.getDatastoreService();	
-	public static void upadeEntity (Entity e){
+	private static DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+	private static DatastoreService list = DatastoreServiceFactory.getDatastoreService();
+	
+	public static void updateEntity (Entity e){
 		ds.put(e);
 	}
 	public static UserPojo getEntity(Key id){
@@ -33,6 +35,35 @@ public class Utils {
 			up.setMusic(e.getProperty("music").toString());
 			up.setInterest(e.getProperty("interest").toString());
 			up.setAbout(e.getProperty("about").toString());
+		} catch (EntityNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return up;
+	}
+	
+	public static void updateListing (Entity e){
+		list.put(e);
+	}
+	public static Listing getListing(Key id){
+		Listing up = new Listing();
+		try {
+			Entity e = list.get(id);
+			
+			up.setId(e.getProperty("id").toString());
+			up.setUser(e.getProperty("user").toString());
+			up.setListingType(e.getProperty("listingType").toString());
+			up.setOrigin(e.getProperty("origin").toString());
+			up.setDestination(e.getProperty("destination").toString());
+			up.setDate(e.getProperty("date").toString());
+			up.setSeats(e.getProperty("seats").toString());
+			up.setCar(e.getProperty("carType").toString());
+			up.setPrice(e.getProperty("price").toString());
+			up.setTransAuto(e.getProperty("transAuto").toString());
+			up.setTransMan(e.getProperty("transMan").toString());
+			up.setBags(e.getProperty("bags").toString());
+			up.setSharedDriving(e.getProperty("sharedDriving").toString());
+			
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -111,7 +111,7 @@ Entity user = new Entity("id",name);
 		user.setProperty("interest", interest);
 		user.setProperty("about", about);
 		
-		Utils.upadeEntity(user);
+		Utils.updateEntity(user);
 		return true;
 	}
 	public String getTransAuto() {

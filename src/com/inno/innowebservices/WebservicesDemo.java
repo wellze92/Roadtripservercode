@@ -31,7 +31,7 @@ public class WebservicesDemo {
 		
 		System.out.println("USERID" + userId);
 		
-		Utils.upadeEntity(user);
+		Utils.updateEntity(user);
 		return true;
 	}
 	
