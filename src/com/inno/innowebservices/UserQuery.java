@@ -42,7 +42,17 @@ public class UserQuery extends HttpServlet {
 	  }
 	  
 	  if (person == null){
-		  
+		  PrintWriter out = resp.getWriter();
+		    String title = "Search_response" ;
+		    out.println(
+		                
+		    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
+			    				
+	  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
+						   "} }"
+			                
+			                );
+	  
 	  }
 	
 	  else{
@@ -92,65 +102,18 @@ public class UserQuery extends HttpServlet {
               HttpServletResponse resp)
 throws ServletException, IOException {
 		boolean error = false;
-		String errorname= "";
-		  UserPojo pj = new UserPojo();
-		  DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
-		  
-		  /**
-		   * Checking to see if the username already exsist in the databse
-		   */
-		  Query q = new Query("name");
-		  PreparedQuery p = dstore.prepare(q);
-		  
-		  for (Entity e: p.asIterable()){
-			  if (e.getProperty("username").equals(req.getParameter("user")))
-				  error = true;
-			  	   errorname = "User already exist";
-		  }
-		  
-		  if(!error){
-		  
-			pj.setName(req.getParameter("user"));
-			pj.setPassword(req.getParameter("pass"));
-			pj.setEmail(req.getParameter("email"));
-			pj.setAge(req.getParameter("age"));
-			pj.setGender(req.getParameter("gen"));
-			pj.setLiscence(req.getParameter("lis"));
-			pj.setSmoker(req.getParameter("smo"));
-			pj.setTransAuto(req.getParameter("transAuto"));
-			pj.setTransMan(req.getParameter("transMan"));
-			pj.setAddress(req.getParameter("add"));
-			pj.setPhone(req.getParameter("phone"));
-			pj.setMusic(req.getParameter("music"));
-			pj.setInterest(req.getParameter("int"));
-			pj.setAbout(req.getParameter("about"));
-			
-			pj.upData();
-			
-			
-			 PrintWriter out = resp.getWriter();
-			    String title = "Register_response" ;
-			    out.println(
-			                
-			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
-				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful		" +"\"" + "\n"  + 
-							   "} }"
-				                
-				                );
-		  }
-		  else{
+		
 			  PrintWriter out = resp.getWriter();
 			    String title = "Register_response" ;
 			    out.println(
 			                
 			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
 				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + errorname + " "  + "\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
 							   "} }"
 				                
 				                );
-		  }
+		  
 }
 	
 }
