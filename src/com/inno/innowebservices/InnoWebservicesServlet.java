@@ -83,7 +83,7 @@ throws ServletException, IOException {
 		  DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 		  
 		  /**
-		   * Checking to see if the username already exsist in the databse
+		   * Checking to see if the username already exists in the database
 		   */
 		  Query q = new Query("name");
 		  PreparedQuery p = dstore.prepare(q);
