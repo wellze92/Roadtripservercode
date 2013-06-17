@@ -1,5 +1,6 @@
 package com.inno.innowebservices;
 
+import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
 
 public class UserPojo {
@@ -18,6 +19,8 @@ public class UserPojo {
 	private String about;
 	private String gender;
 	private String transMan;
+	private Blob image;
+	private String imageType;
 	
 	
 	public String getName() {
@@ -125,5 +128,11 @@ Entity user = new Entity("id",name);
 	}
 	public void setTransMan(String transMan) {
 		this.transMan = transMan;
+	}
+	public Blob getImage() {
+		return image;
+	}
+	public void setImage(Blob image) {
+		this.image = image;
 	}
 }

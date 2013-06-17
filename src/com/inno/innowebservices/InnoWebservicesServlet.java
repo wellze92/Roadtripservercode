@@ -6,6 +6,16 @@ import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -13,6 +23,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+
 
 @SuppressWarnings("serial")
 public class InnoWebservicesServlet extends HttpServlet {
@@ -113,6 +124,27 @@ throws ServletException, IOException {
 			
 			pj.upData();
 			
+			
+			Properties pro = new Properties();
+			Session session = Session.getDefaultInstance(pro, null);
+			
+			String message = "Dear New User \nWelcome to the RoadTrip application. Please feel free to use this service \nYour user name" +
+					"is " + req.getParameter("user") +"\nYour Password is" +req.getParameter("pass") + "\nEnjoy the service\nRegards the road trip team"; 
+			
+			try{
+				Message msg = new MimeMessage(session);
+				msg.setFrom(new InternetAddress("wellze92@gmail.com"));
+				msg.addRecipient(Message.RecipientType.TO,new InternetAddress(req.getParameter("email")));
+				msg.setSubject("Welcome to Road Trip");
+				msg.setText(message);
+				Transport.send(msg);
+			}
+			catch(AddressException e){
+				
+			}
+			catch (MessagingException e) {
+				
+			}	
 			
 			 PrintWriter out = resp.getWriter();
 			    String title = "Register_response" ;
