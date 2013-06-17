@@ -25,10 +25,10 @@ public class ListingServlet extends HttpServlet {
 
 		String ListingID = req.getParameter("id");
 		
-		Key k = KeyFactory.createKey("id", ListingID);
+		Key k = KeyFactory.createKey("Listid", ListingID);
 		Listing list = Utils.getListing(k);
 		
-		boolean exist = false;
+		boolean exist =  true;
 		String errorname= "";
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
@@ -37,12 +37,12 @@ public class ListingServlet extends HttpServlet {
 		 */
 		Query q = new Query("id");
 		PreparedQuery p = dstore.prepare(q);
-
-		for (Entity e: p.asIterable()){
-			if (e.getProperty("id").equals(req.getParameter("id")))
-				exist = true;
-			errorname = "Listing does not exist";
-		}
+//
+//		for (Entity e: p.asIterable()){
+//			if (e.getProperty("id").equals(req.getParameter("id")))
+//				exist = true;
+//			errorname = "Listing does not exist";
+//		}
 		
 		if(exist){
 			 PrintWriter out = resp.getWriter();
@@ -102,17 +102,17 @@ public class ListingServlet extends HttpServlet {
 		/**
 		 * Checking to see if the listing id already exists in the database
 		 */
-		Query q = new Query("id");
+		Query q = new Query("ListId");
 		PreparedQuery p = dstore.prepare(q);
 
-		for (Entity e: p.asIterable()){
-			if (e.getProperty("id").equals(req.getParameter("id")))
-				error = true;
-			errorname = "ListingID used";
-		}
+//		for (Entity e: p.asIterable()){
+//			if (e.getProperty("").equals(req.getParameter("user")))
+//				error = true;
+//			errorname = "ListingID used";
+//		}
 
 		if(!error){
-
+			pj.setId(req.getParameter("id"));
 			pj.setUser(req.getParameter("user"));
 			pj.setListingType(req.getParameter("listingType"));
 			pj.setOrigin(req.getParameter("origin"));

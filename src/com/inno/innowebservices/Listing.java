@@ -95,9 +95,9 @@ public class Listing {
 
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
-		Entity listing = new Entity("id");
+		Entity listing = new Entity("Listid",id);
 		
-		listing.setProperty("id", id);
+		listing.setProperty("ListId", id);
 		listing.setProperty("user", user);
 		listing.setProperty("listingType", listingType);
 		listing.setProperty("origin", origin);
