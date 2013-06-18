@@ -96,13 +96,15 @@ throws ServletException, IOException {
 		  /**
 		   * Checking to see if the username already exists in the database
 		   */
-		  Query q = new Query("name");
+		  Query q = new Query("id");
 		  PreparedQuery p = dstore.prepare(q);
 		  
 		  for (Entity e: p.asIterable()){
-			  if (e.getProperty("username").equals(req.getParameter("user")))
+			  if(e.getProperty("username")!= null){
+			  if (e.getProperty("username").toString().equals(req.getParameter("user"))){
 				  error = true;
 			  	   errorname = "User already exist";
+			  	   break;}}
 		  }
 		  
 		  if(!error){
@@ -121,6 +123,10 @@ throws ServletException, IOException {
 			pj.setMusic(req.getParameter("music"));
 			pj.setInterest(req.getParameter("int"));
 			pj.setAbout(req.getParameter("about"));
+			pj.setPassRate("0");
+			pj.setDrivRate("0");
+			pj.setPassCount("0");
+			pj.setDriveCount("0");
 			
 			pj.upData();
 			
@@ -152,7 +158,7 @@ throws ServletException, IOException {
 			                
 			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
 				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful		" + error +"\"" + "\n"  + 
 							   "} }"
 				                
 				                );
@@ -170,4 +176,44 @@ throws ServletException, IOException {
 				                );
 		  }
 }
+	
+	public void doPut(HttpServletRequest req,
+            HttpServletResponse resp)
+throws ServletException, IOException {
+		
+		String rating ="";
+		String count = "";
+		String Username = req.getParameter("us");
+		Key k = KeyFactory.createKey("id", Username);
+		UserPojo up = Utils.getEntity(k);
+		String choice = req.getParameter("op");
+		if (choice.equals("pass")){
+			rating = up.getPassRate();
+			count = up.getPassCount();
+		}
+		else {rating = up.getDrivRate();
+		count = up.getDriveCount();
+		}
+		
+		Integer curav = Integer.parseInt(rating);
+		Integer curcount = Integer.parseInt(count);
+		
+		Integer newrate= Integer.parseInt(req.getParameter("rate"));
+		int total = curav * curcount;
+		total = total + newrate;
+		curcount++;
+		int newav = total/curcount;
+		
+		if (choice.equals("pass")){
+			up.setPassCount(curcount.toString());
+			up.setPassRate("" +newav);
+			count = up.getPassCount();
+		}
+		else {	up.setDriveCount(curcount.toString());
+		up.setDrivRate("" +newav);
+		}
+		
+		up.upData();
+		
+	}	
 }

@@ -21,6 +21,11 @@ public class UserPojo {
 	private String transMan;
 	private Blob image;
 	private String imageType;
+	private String passRate;
+	private String drivRate;
+	private String passCount;
+	private String driveCount;
+	
 	
 	
 	public String getName() {
@@ -114,6 +119,13 @@ Entity user = new Entity("id",name);
 		user.setProperty("interest", interest);
 		user.setProperty("about", about);
 		
+		user.setProperty("drivRate", drivRate);
+		user.setProperty("passRate", passRate);
+		user.setProperty("passCount",passCount);
+		user.setProperty("driveCount", driveCount);
+		
+		
+		
 		Utils.updateEntity(user);
 		return true;
 	}
@@ -134,5 +146,29 @@ Entity user = new Entity("id",name);
 	}
 	public void setImage(Blob image) {
 		this.image = image;
+	}
+	public String getPassRate() {
+		return passRate;
+	}
+	public void setPassRate(String passRate) {
+		this.passRate = passRate;
+	}
+	public String getDrivRate() {
+		return drivRate;
+	}
+	public void setDrivRate(String drivRate) {
+		this.drivRate = drivRate;
+	}
+	public String getPassCount() {
+		return passCount;
+	}
+	public void setPassCount(String passCount) {
+		this.passCount = passCount;
+	}
+	public String getDriveCount() {
+		return driveCount;
+	}
+	public void setDriveCount(String driveCount) {
+		this.driveCount = driveCount;
 	}
 }

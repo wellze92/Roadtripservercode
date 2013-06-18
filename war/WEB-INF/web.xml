@@ -16,6 +16,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <servlet-name>name</servlet-name>
 	    <servlet-class>com.inno.innowebservices.UserQuery</servlet-class>
 	</servlet>
+	<servlet> 
+	    <servlet-name>GPS</servlet-name>
+	    <servlet-class>com.inno.innowebservices.LocationSrv</servlet-class>
+	    </servlet>
 	
 	
 	<servlet-mapping>
@@ -29,6 +33,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 	    <servlet-name>name</servlet-name>
 	    <url-pattern>/name</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>GPS</servlet-name>
+	    <url-pattern>/location</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

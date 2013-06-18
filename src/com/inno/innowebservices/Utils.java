@@ -35,6 +35,11 @@ public class Utils {
 			up.setMusic(e.getProperty("music").toString());
 			up.setInterest(e.getProperty("interest").toString());
 			up.setAbout(e.getProperty("about").toString());
+			up.setPassRate(e.getProperty("passRate").toString());
+			up.setDrivRate(e.getProperty("drivRate").toString());
+			up.setDriveCount(e.getProperty("driveCount").toString());
+			up.setPassCount(e.getProperty("passCount").toString());
+			
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,12 +68,33 @@ public class Utils {
 			up.setTransMan(e.getProperty("transMan").toString());
 			up.setBags(e.getProperty("bags").toString());
 			up.setSharedDriving(e.getProperty("sharedDriving").toString());
-			
+						
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return up;
 	}
+	
+	
+	public static Location getLocation(Key id){
+		Location up = new Location();
+		try {
+			Entity e = ds.get(id);
+			
+			//up.setId(e.getProperty("id").toString());
+			up.setUser(e.getProperty("user").toString());
+			up.setId(e.getProperty("ListID").toString());
+			up.setLata(e.getProperty("longi").toString());
+			up.setLongi(e.getProperty("lata").toString());
+			
+						
+		} catch (EntityNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return up;
+	}
+	
 	
 }
