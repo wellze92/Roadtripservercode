@@ -18,7 +18,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet>
 	<servlet> 
 	    <servlet-name>GPS</servlet-name>
-	    <servlet-class>com.inno.innowebservices.LocationSrv</servlet-class>
+	    <servlet-class>com.inno.innowebservices.LocationServ</servlet-class>
 	    </servlet>
 	
 	
