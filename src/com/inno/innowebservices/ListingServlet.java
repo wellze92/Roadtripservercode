@@ -15,6 +15,9 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 @SuppressWarnings("serial")
 public class ListingServlet extends HttpServlet {
@@ -23,37 +26,79 @@ public class ListingServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 
-		String ListingID = req.getParameter("id");
-		
-		Key k = KeyFactory.createKey("Listid", ListingID);
-		Listing list = Utils.getListing(k);
-		
-		boolean exist =  true;
-		String errorname= "";
-		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+		//		String ListingID = req.getParameter("id");
+		//		
+		//		Key k = KeyFactory.createKey("Listid", ListingID);
+		//		Listing list = Utils.getListing(k);
+		//		
+		//		boolean exist =  true;
+		//		String errorname= "";
+		//		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+		//
+		//		/**
+		//		 * Checking to see if the listing actually exists in the database
+		//		 */
+		//		Query q = new Query("id");
+		//		PreparedQuery p = dstore.prepare(q);
+		//
+		//		for (Entity e: p.asIterable()){
+		//			if (e.getProperty("id").equals(req.getParameter("id")))
+		//				exist = true;
+		//			errorname = "Listing does not exist";
+		//		}
+		//		
+		//		if(exist){
+		//			 PrintWriter out = resp.getWriter();
+		//			    String title = "CreateListing_Response";
+		//			    
+		//			    		  out.println(
 
-		/**
-		 * Checking to see if the listing actually exists in the database
-		 */
-		Query q = new Query("id");
+		Entity listing = null;	
+
+		String Listing = req.getParameter("id");
+		Filter f = new  FilterPredicate("id", FilterOperator.EQUAL, Listing);	
+		Query q = new Query("id").setFilter(f);
+
+
+		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 		PreparedQuery p = dstore.prepare(q);
-//
-//		for (Entity e: p.asIterable()){
-//			if (e.getProperty("id").equals(req.getParameter("id")))
-//				exist = true;
-//			errorname = "Listing does not exist";
-//		}
-		
-		if(exist){
-			 PrintWriter out = resp.getWriter();
-			    String title = "CreateListing_Response";
-			    
-			    		  out.println(
-					                
-			    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
-			    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
-			    						  
-					                
+
+
+		for (Entity e: p.asIterable()){
+			listing = e;
+			break;
+		}
+
+		if (listing == null){
+			PrintWriter out = resp.getWriter();
+			String title = "GetListing_Response" ;
+			out.println(
+
+					"{"+  "\"" + title +"\"" +  ":   { \n" +
+
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
+		  		    		   "} }"
+
+					);
+
+		}
+
+		else{
+
+
+			Key k = KeyFactory.createKey("id", Listing);
+			Listing list = Utils.getListing(k);
+
+
+			PrintWriter out = resp.getWriter();
+			String title = "GetListing_Response";
+
+			out.println(
+
+					"{"+  "\"" + title +"\"" +  ":   { \n" +
+							"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
+
+
 					                "\t"+ "\"" + "Listing" +"\"" + ": { \n" +
 					                "\t\t"+  "\"" + "ID" +"\"" + ":" +  "\"" + list.getId() +"\"" + ", \n"  +
 					                "\t\t"+  "\"" + "Owner" +"\"" + ":" +  "\"" + list.getUser() +"\"" + ", \n"  +
@@ -70,24 +115,12 @@ public class ListingServlet extends HttpServlet {
 					                "\t\t"+  "\"" + "Shared Driving" +"\"" +  ":" + "\"" + list.getSharedDriving() +"\"" +  ", \n"  +
 					                "} \n"+
 					                "} }"
-					                
-					                
-					                );
+
+
+					);
+
 		}
-		else{
-			 PrintWriter out = resp.getWriter();
-			    String title = "CreateListing_Response";
-			    
-			    		  out.println(
-					                
-			    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
-			    				
-									"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + errorname + " "  + "\"" + "\n"  +  
-								   "} }"
-					                
-					                );
-			
-		}
+
 	}
 
 	public void doPost(HttpServletRequest req,
@@ -105,11 +138,11 @@ public class ListingServlet extends HttpServlet {
 		Query q = new Query("ListId");
 		PreparedQuery p = dstore.prepare(q);
 
-//		for (Entity e: p.asIterable()){
-//			if (e.getProperty("").equals(req.getParameter("user")))
-//				error = true;
-//			errorname = "ListingID used";
-//		}
+		//		for (Entity e: p.asIterable()){
+		//			if (e.getProperty("").equals(req.getParameter("user")))
+		//				error = true;
+		//			errorname = "ListingID used";
+		//		}
 
 		if(!error){
 			pj.setId(req.getParameter("id"));
@@ -130,7 +163,7 @@ public class ListingServlet extends HttpServlet {
 
 
 			PrintWriter out = resp.getWriter();
-			String title = "Register_listing" ;
+			String title = "RegisterListing_response" ;
 			out.println(
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +
@@ -142,7 +175,7 @@ public class ListingServlet extends HttpServlet {
 		}
 		else{
 			PrintWriter out = resp.getWriter();
-			String title = "Register_response" ;
+			String title = "RegisterListing_response" ;
 			out.println(
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +

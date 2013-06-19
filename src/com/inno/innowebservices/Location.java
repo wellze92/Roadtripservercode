@@ -14,14 +14,14 @@ public class Location {
 
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
-		Entity listing = new Entity("CurListid",id);
+		Entity loc = new Entity("CurListid",id);
 		
-		listing.setProperty("ListId", id);
-		listing.setProperty("user", user);
-		listing.setProperty("longi", longi);
-		listing.setProperty("lata", lata);
+		loc.setProperty("ListId", id);
+		loc.setProperty("user", user);
+		loc.setProperty("longi", longi);
+		loc.setProperty("lata", lata);
 		
-		Utils.updateListing(listing);
+		Utils.updateLocation(loc);
 		return true;
 	}
 	public String getId() {

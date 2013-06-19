@@ -95,6 +95,29 @@ public class Utils {
 		}
 		return up;
 	}
+	public static void updateLocation (Entity e){
+		list.put(e);
+	}
+	
+	public static void updateRequest (Entity e){
+		list.put(e);
+	}
+	public static Request getRequest(Key id){
+		Request up = new Request();
+		try {
+			Entity e = list.get(id);
+			
+			up.setId(e.getProperty("id").toString());
+			up.setAccept(e.getProperty("accept").toString());
+			up.setDecline(e.getProperty("decline").toString());
+			
+						
+		} catch (EntityNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return up;
+	}
 	
 	
 }
