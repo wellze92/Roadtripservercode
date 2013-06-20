@@ -119,5 +119,22 @@ public class Utils {
 		return up;
 	}
 	
+	public static Comment getComment(Key id){
+		Comment up = new Comment();
+		try {
+			Entity e = ds.get(id);
+			
+			up.setId(e.getProperty("id").toString());
+			up.setUser(e.getProperty("user").toString());
+			up.setComment(e.getProperty("comment").toString());
 	
+	
+			
 }
+		catch (EntityNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return up;
+	}
+	}
