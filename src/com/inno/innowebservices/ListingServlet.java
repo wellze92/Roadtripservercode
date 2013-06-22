@@ -112,16 +112,16 @@ public class ListingServlet extends HttpServlet {
 		/**
 		 * Checking to see if the listing id already exists in the database
 		 */
-		Query q = new Query("ListId");
+		Query q = new Query("Listid");
 		PreparedQuery p = dstore.prepare(q);
 
 		for (Entity e: p.asIterable()){
-			if (e.getProperty("id").equals(req.getParameter("id"))) {
+			if (e.getProperty("ListId").toString().equals(req.getParameter("id"))) {
 				errorname = "ListingID used";
 				exist = true;
+				break;
 			}
-			else 
-				exist = false;
+			
 
 		}
 
@@ -147,7 +147,7 @@ public class ListingServlet extends HttpServlet {
 			String title = "RegisterListing_response" ;
 			out.println(
 
-					"{"+  "\"" + title +"\"" +  ":   { \n" +
+					"{"+  "\"" + title + " " + exist + "\"" +  ":   { \n" +
 
 		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
 		  		    		   "} }"
