@@ -63,6 +63,7 @@ public class ListingServlet extends HttpServlet {
 							"\t\t"+ "\"" + "Origin" +"\"" + ":" + "\"" + list.getOrigin() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Destination" +"\"" + ":" + "\"" + list.getDestination() +"\"" + ", \n"+
 							"\t\t"+ "\"" + "Date" +"\"" + ":" + "\"" + list.getDate() +"\"" +", \n"+
+							"\t\t"+ "\"" + "Time" +"\"" + ":" + "\"" + list.getTime() +"\"" +", \n"+
 							"\t\t"+ "\"" + "Seats" +"\"" + ":" + "\"" + list.getSeats() +"\"" +", \n" +
 							"\t\t"+ "\"" + "Car" +"\"" + ":" + "\"" + list.getCar() +"\"" +", \n" +
 							"\t\t"+ "\"" + "Price" +"\"" + ":" + "\"" + list.getPrice() +"\"" + " \n" +
@@ -126,6 +127,7 @@ public class ListingServlet extends HttpServlet {
 			pj.setOrigin(req.getParameter("origin"));
 			pj.setDestination(req.getParameter("destination"));
 			pj.setDate(req.getParameter("date"));
+			pj.setTime(req.getParameter("time"));
 			pj.setSeats(req.getParameter("seats"));
 			pj.setCar(req.getParameter("car"));
 			pj.setPrice(req.getParameter("price"));
@@ -141,7 +143,7 @@ public class ListingServlet extends HttpServlet {
 			String title = "RegisterListing_response" ;
 			out.println(
 
-					"{"+  "\"" + title + " " + exist + "\"" +  ":   { \n" +
+					"{"+  "\"" + title + "\"" +  ":   { \n" +
 
 		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
 		  		    		   "} }"

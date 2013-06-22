@@ -60,6 +60,7 @@ public class Utils {
 			up.setListingType(e.getProperty("listingType").toString());
 			up.setOrigin(e.getProperty("origin").toString());
 			up.setDestination(e.getProperty("destination").toString());
+			up.setTime(e.getProperty("time").toString());
 			up.setDate(e.getProperty("date").toString());
 			up.setSeats(e.getProperty("seats").toString());
 			up.setCar(e.getProperty("carType").toString());
@@ -109,7 +110,7 @@ public class Utils {
 			
 			up.setId(e.getProperty("id").toString());
 			up.setAccept(e.getProperty("accept").toString());
-			up.setDecline(e.getProperty("decline").toString());
+			up.setUser(e.getProperty("user").toString());
 			
 						
 		} catch (EntityNotFoundException e) {

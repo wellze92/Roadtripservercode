@@ -10,6 +10,7 @@ public class Listing {
 	private String origin;
 	private String destination;
 	private String date;
+	private String time;
 	private String seats;
 	private String car;
 	private String price;
@@ -17,6 +18,8 @@ public class Listing {
 	private String transMan;
 	private String bags;
 	private String sharedDriving;
+	
+	//private ArrayList<String> reqList = new ArrayList<String>();
 
 
 	public String getUser() {
@@ -103,6 +106,7 @@ public class Listing {
 		listing.setProperty("origin", origin);
 		listing.setProperty("destination", destination);
 		listing.setProperty("date", date);
+		listing.setProperty("time", time);
 		listing.setProperty("seats", seats);
 		listing.setProperty("carType", car);
 		listing.setProperty("price",price);
@@ -119,5 +123,11 @@ public class Listing {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
 	}
 }
