@@ -15,7 +15,6 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.FilterOperator;
 
 @SuppressWarnings("serial")
 public class ListingServlet extends HttpServlet {
@@ -29,26 +28,21 @@ public class ListingServlet extends HttpServlet {
 		Key k = KeyFactory.createKey("Listid", ListingID);
 		Listing list = Utils.getListing(k);
 
-		boolean exist = true;
+		boolean exist = false;
 		String errorname= "Listing ID does not exist.";
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
 		/**
 		 * Checking to see if the listing actually exists in the database
 		 */
-		Query q = new Query("id");
+		Query q = new Query("Listid");
 		PreparedQuery p = dstore.prepare(q);
 
-		for (Entity e : p.asIterable()){
-//			if (e.getProperty("id").equals(k.getName()))
-//				exist = true;
-//			else {
-//				exist = false;
-//				errorname = "Listing ID does not exist";
-//			}
-			String userID = (String) e.getProperty("id");
-			if (userID.equalsIgnoreCase(k.getName()))
+		for (Entity e: p.asIterable()){
+			if (e.getProperty("ListId").toString().equals(req.getParameter("id"))) {
 				exist = true;
+				break;
+			}
 		}
 		
 		if(exist){
