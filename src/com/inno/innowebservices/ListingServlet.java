@@ -15,9 +15,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 @SuppressWarnings("serial")
 public class ListingServlet extends HttpServlet {
@@ -26,96 +24,75 @@ public class ListingServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 
-		//		String ListingID = req.getParameter("id");
-		//		
-		//		Key k = KeyFactory.createKey("Listid", ListingID);
-		//		Listing list = Utils.getListing(k);
-		//		
-		//		boolean exist =  true;
-		//		String errorname= "";
-		//		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
-		//
-		//		/**
-		//		 * Checking to see if the listing actually exists in the database
-		//		 */
-		//		Query q = new Query("id");
-		//		PreparedQuery p = dstore.prepare(q);
-		//
-		//		for (Entity e: p.asIterable()){
-		//			if (e.getProperty("id").equals(req.getParameter("id")))
-		//				exist = true;
-		//			errorname = "Listing does not exist";
-		//		}
-		//		
-		//		if(exist){
-		//			 PrintWriter out = resp.getWriter();
-		//			    String title = "CreateListing_Response";
-		//			    
-		//			    		  out.println(
+		String ListingID = req.getParameter("id");
 
-		Entity listing = null;	
+		Key k = KeyFactory.createKey("Listid", ListingID);
+		Listing list = Utils.getListing(k);
 
-		String Listing = req.getParameter("id");
-		Filter f = new  FilterPredicate("id", FilterOperator.EQUAL, Listing);	
-		Query q = new Query("id").setFilter(f);
-
-
+		boolean exist = true;
+		String errorname= "Listing ID does not exist.";
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+
+		/**
+		 * Checking to see if the listing actually exists in the database
+		 */
+		Query q = new Query("id");
 		PreparedQuery p = dstore.prepare(q);
 
-
-		for (Entity e: p.asIterable()){
-			listing = e;
-			break;
+		for (Entity e : p.asIterable()){
+//			if (e.getProperty("id").equals(k.getName()))
+//				exist = true;
+//			else {
+//				exist = false;
+//				errorname = "Listing ID does not exist";
+//			}
+			String userID = (String) e.getProperty("id");
+			if (userID.equalsIgnoreCase(k.getName()))
+				exist = true;
 		}
+		
+		if(exist){
 
-		if (listing == null){
 			PrintWriter out = resp.getWriter();
-			String title = "GetListing_Response" ;
+			String title = "CreateListing_Response";
+
 			out.println(
 
-					"{"+  "\"" + title +"\"" +  ":   { \n" +
+					"{"+ "\"" + title +"\"" + ": { \n" +
+							"\t"+ "\"" + "status" +"\"" + ":" + "\"" + "success" +"\"" + ", \n" +
 
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
-		  		    		   "} }"
+
+							"\t"+ "\"" + "Listing" +"\"" + ": { \n" +
+							"\t\t"+ "\"" + "ID" +"\"" + ":" + "\"" + list.getId() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Owner" +"\"" + ":" + "\"" + list.getUser() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Listing Type" +"\""+ ":" + "\"" + list.getListingType() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Origin" +"\"" + ":" + "\"" + list.getOrigin() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Destination" +"\"" + ":" + "\"" + list.getDestination() +"\"" + ", \n"+
+							"\t\t"+ "\"" + "Date" +"\"" + ":" + "\"" + list.getDate() +"\"" +", \n"+
+							"\t\t"+ "\"" + "Seats" +"\"" + ":" + "\"" + list.getSeats() +"\"" +", \n" +
+							"\t\t"+ "\"" + "Car" +"\"" + ":" + "\"" + list.getCar() +"\"" +", \n" +
+							"\t\t"+ "\"" + "Price" +"\"" + ":" + "\"" + list.getPrice() +"\"" + " \n" +
+							"\t\t"+ "\"" + "TransMissionAuto" +"\"" + ":" + "\"" + list.getTransAuto() +"\"" +", \n" +
+							"\t\t"+ "\"" + "TransMissionManual" +"\"" + ":" + "\"" + list.getTransMan() +"\"" +", \n" +
+							"\t\t"+ "\"" + "Bags" +"\"" + ":" + "\"" + list.getBags() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Shared Driving" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
+							"} \n"+
+							"} }"
+
 
 					);
-
 		}
-
 		else{
-
-
-			Key k = KeyFactory.createKey("id", Listing);
-			Listing list = Utils.getListing(k);
-
-
 			PrintWriter out = resp.getWriter();
-			String title = "GetListing_Response";
+			String title = "CreateListing_Response";
+			errorname = "ListingID you entered does not exist.";
 
 			out.println(
 
-					"{"+  "\"" + title +"\"" +  ":   { \n" +
-							"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
+					"{"+ "\"" + title +"\"" + ": { \n" +
 
-
-					                "\t"+ "\"" + "Listing" +"\"" + ": { \n" +
-					                "\t\t"+  "\"" + "ID" +"\"" + ":" +  "\"" + list.getId() +"\"" + ", \n"  +
-					                "\t\t"+  "\"" + "Owner" +"\"" + ":" +  "\"" + list.getUser() +"\"" + ", \n"  +
-					                "\t\t"+  "\"" + "Listing Type" +"\""+ ":" +   "\"" +  list.getListingType() +"\"" + ", \n"  +
-					                "\t\t"+  "\"" + "Origin" +"\"" +  ":" +  "\"" +  list.getOrigin() +"\"" + ", \n"  +
-					                "\t\t"+  "\"" + "Destination" +"\"" +  ":" +  "\"" + list.getDestination() +"\"" + ", \n"+   
-					                "\t\t"+  "\"" + "Date" +"\"" +  ":" + "\"" + list.getDate() +"\"" +", \n"+  
-					                "\t\t"+  "\"" + "Seats" +"\"" +  ":" +  "\"" + list.getSeats() +"\"" +", \n"  +
-					                "\t\t"+  "\"" + "Car" +"\"" +  ":" + "\"" + list.getCar() +"\"" +", \n" + 
-					                "\t\t"+  "\"" + "Price" +"\"" +  ":" + "\"" + list.getPrice() +"\"" +  " \n" +
-					                "\t\t"+  "\"" + "TransMissionAuto" +"\"" +  ":" +  "\"" + list.getTransAuto() +"\"" +", \n"  +
-					                "\t\t"+  "\"" + "TransMissionManual" +"\"" +  ":" +  "\"" + list.getTransMan() +"\"" +", \n"  +
-					                "\t\t"+  "\"" + "Bags" +"\"" +  ":" +  "\"" + list.getBags() +"\"" +  ", \n"  +
-					                "\t\t"+  "\"" + "Shared Driving" +"\"" +  ":" + "\"" + list.getSharedDriving() +"\"" +  ", \n"  +
-					                "} \n"+
-					                "} }"
-
+					"\t"+ "\"" + "status" +"\"" + ":" + "\"" + "fail: " + errorname + " " + "\"" + "\n" +
+					"} }"
 
 					);
 
@@ -127,8 +104,8 @@ public class ListingServlet extends HttpServlet {
 			HttpServletResponse resp)
 					throws ServletException, IOException {
 
-		boolean error = false;
-		String errorname= "";
+		boolean exist = false;
+		String errorname= "Listing already exist.";
 		Listing pj= new Listing();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
@@ -138,13 +115,17 @@ public class ListingServlet extends HttpServlet {
 		Query q = new Query("ListId");
 		PreparedQuery p = dstore.prepare(q);
 
-		//		for (Entity e: p.asIterable()){
-		//			if (e.getProperty("").equals(req.getParameter("user")))
-		//				error = true;
-		//			errorname = "ListingID used";
-		//		}
+		for (Entity e: p.asIterable()){
+			if (e.getProperty("id").equals(req.getParameter("id"))) {
+				errorname = "ListingID used";
+				exist = true;
+			}
+			else 
+				exist = false;
 
-		if(!error){
+		}
+
+		if(!exist){
 			pj.setId(req.getParameter("id"));
 			pj.setUser(req.getParameter("user"));
 			pj.setListingType(req.getParameter("listingType"));
@@ -180,7 +161,7 @@ public class ListingServlet extends HttpServlet {
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +
 
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + errorname + " "  + "\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail: " + errorname + " "  + "\"" + "\n"  + 
 		  		    		   "} }"
 
 					);

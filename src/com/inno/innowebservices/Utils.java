@@ -55,7 +55,7 @@ public class Utils {
 		try {
 			Entity e = list.get(id);
 			
-			//up.setId(e.getProperty("id").toString());
+			up.setId(id.getName());
 			up.setUser(e.getProperty("user").toString());
 			up.setListingType(e.getProperty("listingType").toString());
 			up.setOrigin(e.getProperty("origin").toString());
