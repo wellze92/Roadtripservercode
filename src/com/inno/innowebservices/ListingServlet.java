@@ -44,7 +44,7 @@ public class ListingServlet extends HttpServlet {
 				break;
 			}
 		}
-		
+
 		if(exist){
 
 			PrintWriter out = resp.getWriter();
@@ -71,6 +71,7 @@ public class ListingServlet extends HttpServlet {
 							"\t\t"+ "\"" + "TransMissionManual" +"\"" + ":" + "\"" + list.getTransMan() +"\"" +", \n" +
 							"\t\t"+ "\"" + "Bags" +"\"" + ":" + "\"" + list.getBags() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Shared Driving" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Requests" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
 							"} \n"+
 							"} }"
 
@@ -100,7 +101,8 @@ public class ListingServlet extends HttpServlet {
 					throws ServletException, IOException {
 
 		boolean exist = false;
-		String errorname= "Listing already exist.";
+		boolean isUser = false;
+		String errorname= "";
 		Listing pj= new Listing();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
@@ -112,15 +114,21 @@ public class ListingServlet extends HttpServlet {
 
 		for (Entity e: p.asIterable()){
 			if (e.getProperty("ListId").toString().equals(req.getParameter("id"))) {
-				errorname = "ListingID used";
-				exist = true;
-				break;
+				if(e.getProperty("user").toString().equals(req.getParameter("user"))){
+					isUser = true;
+					break;
+				}
+				else if (!e.getProperty("user").toString().equals(req.getParameter("user"))){
+					errorname = "ListingID used";
+					exist = true;
+					break;
+				}
 			}
-			
+
 
 		}
 
-		if(!exist){
+		if(!exist || isUser){
 			pj.setId(req.getParameter("id"));
 			pj.setUser(req.getParameter("user"));
 			pj.setListingType(req.getParameter("listingType"));

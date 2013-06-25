@@ -1,5 +1,6 @@
 package com.inno.innowebservices;
 
+
 import com.google.appengine.api.datastore.Entity;
 
 public class Listing {
@@ -19,9 +20,6 @@ public class Listing {
 	private String bags;
 	private String sharedDriving;
 	
-	//private ArrayList<String> reqList = new ArrayList<String>();
-
-
 	public String getUser() {
 		return user;
 	}
@@ -130,4 +128,5 @@ public class Listing {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	
 }

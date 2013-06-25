@@ -4,7 +4,7 @@ import com.google.appengine.api.datastore.Entity;
 
 public class Request {
 	
-	private String accept, id, user= "";
+	private String accept, id, user, listID= "";
 
 	public String getAccept() {
 		return accept;
@@ -33,5 +33,16 @@ public class Request {
 
 		Utils.updateRequest(req);
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "Request [Accepted=" + accept + ", reqID=" + id + ", User=" + user
+				+ ", ListingID=" + listID + "]";
+	}
+	public String getListID() {
+		return listID;
+	}
+	public void setListID(String listID) {
+		this.listID = listID;
 	}
 }
