@@ -44,7 +44,7 @@ public class LocationServ extends HttpServlet {
 		
 		
 			 PrintWriter out = resp.getWriter();
-			    String title = "CreateListing_Response";
+			    String title = "GetLocation_Response";
 			    
 			    		  out.println(
 					                
@@ -96,7 +96,7 @@ public class LocationServ extends HttpServlet {
 
 
 			PrintWriter out = resp.getWriter();
-			String title = "Register_listing" ;
+			String title = "Register_location" ;
 			out.println(
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +

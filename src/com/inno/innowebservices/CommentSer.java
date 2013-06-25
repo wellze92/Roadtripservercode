@@ -42,12 +42,15 @@ public class CommentSer extends HttpServlet {
 			if (e.getProperty("ListId").equals(req.getParameter("id"))){
 				comments = comments + "\t\t"+  "\"" + "comment" +"\"" + ":" +  "\"" + e.getProperty("comment") +"\"" + ", \n";
 			}
+	 
 			
 		}
 		
-		
+	comments = comments.substring(0,comments.length()-3) + "\n";
+	
+	
 			 PrintWriter out = resp.getWriter();
-			    String title = "CreateListing_Response";
+			    String title = "Comment_Get";
 			    
 			    		  out.println(
 					                
@@ -55,7 +58,7 @@ public class CommentSer extends HttpServlet {
 			    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
 			    						  
 					                
-					                "\t"+ "\"" + "Listing" +"\"" + ": { \n" +
+					                "\t"+ "\"" + "Comments" +"\"" + ": { \n" +
 					                comments +
 					          
 					                "} \n"+
@@ -100,7 +103,7 @@ public class CommentSer extends HttpServlet {
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +
 
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful	" +"\"" + "\n"  + 
 		  		    		   "} }"
 
 					);

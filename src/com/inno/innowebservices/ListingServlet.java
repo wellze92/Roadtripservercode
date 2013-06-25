@@ -48,7 +48,7 @@ public class ListingServlet extends HttpServlet {
 		if(exist){
 
 			PrintWriter out = resp.getWriter();
-			String title = "CreateListing_Response";
+			String title = "GetListing_Response";
 
 			out.println(
 
@@ -83,7 +83,7 @@ public class ListingServlet extends HttpServlet {
 		}
 		else{
 			PrintWriter out = resp.getWriter();
-			String title = "CreateListing_Response";
+			String title = "GetListing_Response";
 			errorname = "ListingID you entered does not exist.";
 
 			out.println(
