@@ -69,6 +69,8 @@ public class Utils {
 			up.setTransMan(e.getProperty("transMan").toString());
 			up.setBags(e.getProperty("bags").toString());
 			up.setSharedDriving(e.getProperty("sharedDriving").toString());
+			up.setImage1(e.getProperty("image1").toString());
+			up.setImage2(e.getProperty("image2").toString());
 						
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -108,10 +110,10 @@ public class Utils {
 		try {
 			Entity e = list.get(id);
 			
-			up.setId(e.getProperty("id").toString());
+			up.setListID(e.getProperty("ListId").toString());
 			up.setAccept(e.getProperty("accept").toString());
 			up.setUser(e.getProperty("user").toString());
-			
+			up.setReqID(e.getProperty("reqID").toString());
 						
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -19,7 +19,22 @@ public class Listing {
 	private String transMan;
 	private String bags;
 	private String sharedDriving;
+	private String image1;
+	private String image2;
 	
+		
+	public String getImage1() {
+		return image1;
+	}
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+	public String getImage2() {
+		return image2;
+	}
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -112,6 +127,8 @@ public class Listing {
 		listing.setProperty("transMan",transMan);
 		listing.setProperty("bags", bags);
 		listing.setProperty("sharedDriving", sharedDriving);
+		listing.setProperty("image1", image1);
+		listing.setProperty("image2", image2);
 
 		Utils.updateListing(listing);
 		return true;
