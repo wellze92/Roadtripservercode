@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +16,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
-public class CommentSer {
+public class CommentSer extends HttpServlet {
 	
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -38,8 +39,8 @@ public class CommentSer {
 		String comments = "";
 
 	for (Entity e: p.asIterable()){
-			if (e.getProperty("id").equals(req.getParameter("id"))){
-				comments = comments + "\t\t"+  "\"" + "comment" +"\"" + ":" +  "\"" + e.getProperty(":") +"\"" + ", \n";
+			if (e.getProperty("ListId").equals(req.getParameter("id"))){
+				comments = comments + "\t\t"+  "\"" + "comment" +"\"" + ":" +  "\"" + e.getProperty("comment") +"\"" + ", \n";
 			}
 			
 		}
@@ -87,7 +88,7 @@ public class CommentSer {
 
 			pj.setId(req.getParameter("id"));
 			pj.setUser(req.getParameter("user"));
-			pj.setComment(req.getParameter("lata"));
+			pj.setComment(req.getParameter("comment"));
 //			pj.setLongi(req.getParameter("long"));
 
 			pj.upData();

@@ -16,6 +16,7 @@ public class Comment {
 		listing.setProperty("ListId", id);
 		listing.setProperty("user", user);
 		listing.setProperty("comment", comment);
+		Utils.updateEntity(listing);
 		return true;
 	}
 	

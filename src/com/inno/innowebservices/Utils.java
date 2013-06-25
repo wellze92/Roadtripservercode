@@ -85,7 +85,7 @@ public class Utils {
 			
 			//up.setId(e.getProperty("id").toString());
 			up.setUser(e.getProperty("user").toString());
-			up.setId(e.getProperty("ListID").toString());
+			up.setId(e.getProperty("ListId").toString());
 			up.setLata(e.getProperty("longi").toString());
 			up.setLongi(e.getProperty("lata").toString());
 			
@@ -125,7 +125,7 @@ public class Utils {
 		try {
 			Entity e = ds.get(id);
 			
-			up.setId(e.getProperty("id").toString());
+			up.setId(e.getProperty("ListId").toString());
 			up.setUser(e.getProperty("user").toString());
 			up.setComment(e.getProperty("comment").toString());
 	

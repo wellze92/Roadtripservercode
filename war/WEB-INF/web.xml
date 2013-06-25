@@ -20,7 +20,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <servlet-name>GPS</servlet-name>
 	    <servlet-class>com.inno.innowebservices.LocationServ</servlet-class>
 	    </servlet>
-	
+	<servlet>
+	    <servlet-name>Comment</servlet-name>
+	    <servlet-class>com.inno.innowebservices.CommentSer</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>goat</servlet-name>
@@ -33,6 +36,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 	    <servlet-name>name</servlet-name>
 	    <url-pattern>/name</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>Comment</servlet-name>
+	    <url-pattern>/com</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 	    <servlet-name>GPS</servlet-name>
