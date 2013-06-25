@@ -11,7 +11,8 @@ public class Comment {
 	
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
-		Entity listing = new Entity("Commentid",id);
+		Entity listing = new Entity("Commentid",id + comment + user);
+		
 		
 		listing.setProperty("ListId", id);
 		listing.setProperty("user", user);

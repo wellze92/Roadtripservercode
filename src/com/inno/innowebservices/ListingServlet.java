@@ -66,12 +66,12 @@ public class ListingServlet extends HttpServlet {
 							"\t\t"+ "\"" + "Time" +"\"" + ":" + "\"" + list.getTime() +"\"" +", \n"+
 							"\t\t"+ "\"" + "Seats" +"\"" + ":" + "\"" + list.getSeats() +"\"" +", \n" +
 							"\t\t"+ "\"" + "Car" +"\"" + ":" + "\"" + list.getCar() +"\"" +", \n" +
-							"\t\t"+ "\"" + "Price" +"\"" + ":" + "\"" + list.getPrice() +"\"" + " \n" +
+							"\t\t"+ "\"" + "Price" +"\"" + ":" + "\"" + list.getPrice() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "TransMissionAuto" +"\"" + ":" + "\"" + list.getTransAuto() +"\"" +", \n" +
 							"\t\t"+ "\"" + "TransMissionManual" +"\"" + ":" + "\"" + list.getTransMan() +"\"" +", \n" +
 							"\t\t"+ "\"" + "Bags" +"\"" + ":" + "\"" + list.getBags() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Shared Driving" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "Requests" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Requests" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + " \n" +
 							"} \n"+
 							"} }"
 

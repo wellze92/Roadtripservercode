@@ -101,7 +101,7 @@ public class LocationServ extends HttpServlet {
 
 					"{"+  "\"" + title +"\"" +  ":   { \n" +
 
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful	" +"\"" + "\n"  + 
 		  		    		   "} }"
 
 					);

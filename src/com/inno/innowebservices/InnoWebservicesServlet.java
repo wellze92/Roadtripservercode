@@ -158,7 +158,7 @@ throws ServletException, IOException {
 			                
 			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
 				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful		" + error +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sucessful" +"\"" + "\n"  + 
 							   "} }"
 				                
 				                );
@@ -170,7 +170,7 @@ throws ServletException, IOException {
 			                
 			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
 				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + errorname + " "  + "\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
 							   "} }"
 				                
 				                );
@@ -214,6 +214,17 @@ throws ServletException, IOException {
 		}
 		
 		up.upData();
+		
+		 PrintWriter out = resp.getWriter();
+		    String title = "Rating_Response" ;
+		    out.println(
+		                
+		    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
+			    				
+	  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "sussess " + " "  + "\"" + "\n"  + 
+						   "} }"
+			                
+			                );
 		
 	}	
 }
