@@ -194,12 +194,20 @@ public class ListingServlet extends HttpServlet {
 
 		PrintWriter out = resp.getWriter();
 		String title = "GetAllListings_Response";
-
+		int count = 0;
+		
+		for (Entity e: p.asIterable()){
+			count = count+1;
+		}
+		
 		out.println(
 
-				"{"+ "\"" + title +"\"" + ": { \n" 
+				"{"+ "\"" + title +"\"" + ": { \n" +
+						"\t\t"+ "\"" + "ListingCount" +"\"" + ":" + "\"" + count +"\"" + ", \n"
 				);
 
+		
+		
 		for (Entity e: p.asIterable()){
 
 			out.println(
@@ -221,8 +229,7 @@ public class ListingServlet extends HttpServlet {
 							"\t\t"+ "\"" + "SharedDriving" +"\"" + ":" + "\"" + e.getProperty("sharedDriving").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Image1" +"\"" + ":" + "\"" + e.getProperty("image1").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + e.getProperty("image2").toString() +"\"" + ", \n" +
-							"} \n"+
-							"} }"
+							"} \n"
 					);
 
 		}
