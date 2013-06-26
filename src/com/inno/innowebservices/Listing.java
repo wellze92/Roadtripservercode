@@ -7,7 +7,6 @@ public class Listing {
 
 	private String id;
 	private String user;		
-	private String listingType;
 	private String origin;
 	private String destination;
 	private String date;
@@ -40,12 +39,6 @@ public class Listing {
 	}
 	public void setUser(String user) {
 		this.user = user;
-	}
-	public String getListingType() {
-		return listingType;
-	}
-	public void setListingType(String listingType) {
-		this.listingType = listingType;
 	}
 	public String getOrigin() {
 		return origin;
@@ -115,7 +108,6 @@ public class Listing {
 		
 		listing.setProperty("ListId", id);
 		listing.setProperty("user", user);
-		listing.setProperty("listingType", listingType);
 		listing.setProperty("origin", origin);
 		listing.setProperty("destination", destination);
 		listing.setProperty("date", date);
