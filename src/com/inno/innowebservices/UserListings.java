@@ -52,7 +52,8 @@ public class UserListings extends HttpServlet {
 		else {
 			out.println(
 
-					"{"+ "\"" + title +"\"" + ": { \n"
+					"{"+ "\"" + title +"\"" + ": { \n" +
+							"\t"+ "\"" + "Count" +"\"" + ":" + "\"" + count +"\"" + ", \n"
 					);
 
 			for (Entity e: p.asIterable()){

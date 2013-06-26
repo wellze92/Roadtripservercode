@@ -52,7 +52,7 @@ public class ListingRequests extends HttpServlet {
 			out.println(
 
 					"{"+ "\"" + title +"\"" + ": { \n" +
-							"\t\t"+ "\"" + "Count" +"\"" + ":" + "\"" + count +"\"" + ", \n"
+							"\t"+ "\"" + "Count" +"\"" + ":" + "\"" + count +"\"" + ", \n"
 					);
 
 			for (Entity e: p.asIterable()){
