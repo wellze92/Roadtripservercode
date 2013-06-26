@@ -4,7 +4,8 @@ import com.google.appengine.api.datastore.Entity;
 
 public class Request {
 	
-	private String accept, reqID, user, listID;
+	private String accept = "false";
+	private String reqID, user, listID;
 
 	public boolean upData(){
 		Entity req = new Entity("reqID",reqID);
