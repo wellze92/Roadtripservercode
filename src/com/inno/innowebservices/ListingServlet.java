@@ -59,7 +59,6 @@ public class ListingServlet extends HttpServlet {
 							"\t"+ "\"" + "Listing" +"\"" + ": { \n" +
 							"\t\t"+ "\"" + "ID" +"\"" + ":" + "\"" + list.getId() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Owner" +"\"" + ":" + "\"" + list.getUser() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "ListingType" +"\""+ ":" + "\"" + list.getListingType() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Origin" +"\"" + ":" + "\"" + list.getOrigin() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Destination" +"\"" + ":" + "\"" + list.getDestination() +"\"" + ", \n"+
 							"\t\t"+ "\"" + "Date" +"\"" + ":" + "\"" + list.getDate() +"\"" +", \n"+
@@ -132,7 +131,6 @@ public class ListingServlet extends HttpServlet {
 		if(!exist || isUser){
 			pj.setId(req.getParameter("id"));
 			pj.setUser(req.getParameter("user"));
-			pj.setListingType(req.getParameter("listingType"));
 			pj.setOrigin(req.getParameter("origin"));
 			pj.setDestination(req.getParameter("destination"));
 			pj.setDate(req.getParameter("date"));
@@ -215,7 +213,6 @@ public class ListingServlet extends HttpServlet {
 							"\t"+ "\"" + "Listing" +"\"" + ": { \n" +
 							"\t\t"+ "\"" + "ID" +"\"" + ":" + "\"" + e.getProperty("ListId").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Owner" +"\"" + ":" + "\"" + e.getProperty("user").toString() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "ListingType" +"\""+ ":" + "\"" + e.getProperty("listingType").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Origin" +"\"" + ":" + "\"" + e.getProperty("origin").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Destination" +"\"" + ":" + "\"" + e.getProperty("destination").toString() +"\"" + ", \n"+
 							"\t\t"+ "\"" + "Date" +"\"" + ":" + "\"" + e.getProperty("date").toString() +"\"" +", \n"+
