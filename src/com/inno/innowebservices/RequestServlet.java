@@ -15,7 +15,11 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 
+@SuppressWarnings("serial")
 public class RequestServlet extends HttpServlet {
 
 
@@ -23,7 +27,7 @@ public class RequestServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 
-		String reqID = req.getParameter("reqid");
+		String reqID = req.getParameter("reqID");
 
 		Key k = KeyFactory.createKey("reqID", reqID);
 		Request request = Utils.getRequest(k);
@@ -86,41 +90,147 @@ public class RequestServlet extends HttpServlet {
 					throws ServletException, IOException {
 
 
-		Request pj= new Request();
+		/*boolean exist = false;
+		boolean isOwner = false;
+		String errorname= "Request fail";
+		Request r= new Request();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
+
+		Query q = new Query("ListId");
+		PreparedQuery p = dstore.prepare(q);
+
+		Query q1 = new Query("reqID");
+		PreparedQuery p1 = ds.prepare(q1);
+
+		for (Entity e : p1.asIterable()){
+			if (req.getParameter("reqID").equals(e.getProperty("reqID"))){
+				for (Entity d: p.asIterable()){
+					if (e.getProperty("ListId").equals(d.getProperty("ListId"))){
+						isOwner = true;
+						break;
+					}
+
+				}
+			} else if (!req.getParameter("reqID").equals(e.getProperty("reqID"))){
+				errorname = "Unauthorized access.";
+				exist = true;
+				break;
+			}
+		}
+
+		for (Entity d: p.asIterable()){
+			if (d.getProperty("ListId").toString().equals(req.getParameter("ListId"))) {
+				if(d.getProperty("user").toString().equals(req.getParameter("user"))){
+					isOwner = true;
+					break;
+				}
+				else if (!d.getProperty("user").toString().equals(req.getParameter("user"))){
+					errorname = "Unauthorized access.";
+					exist = true;
+					break;
+				}
+			}
+		}*/
+
+		boolean exist = false;
+		boolean isOwner = false;
+		String errorname= "";
+		Request r= new Request();
+		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
+		Filter f1 = new FilterPredicate("reqID", FilterOperator.EQUAL, req.getParameter("reqID"));
+		Filter f2 = new FilterPredicate("user", FilterOperator.EQUAL, req.getParameter("user"));
 
 		/**
 		 * Checking to see if the listing id already exists in the database
 		 */
+		Query q1 = new Query("reqID");
+		q1.setFilter(f1);
+		Iterable<Entity> reqids = dstore.prepare(q1).asIterable();
 
 
-		//		for (Entity e: p.asIterable()){
-		//			if (e.getProperty("").equals(req.getParameter("user")))
-		//				error = true;
-		//			errorname = "ListingID used";
-		//		}
+		Query q2 = new Query("Listid");
+		q2.setFilter(f2);
+		Iterable<Entity> listUsers = dstore.prepare(q2).asIterable();
+		String user = "";
 
-		pj.setReqID(req.getParameter("reqID"));
-		pj.setUser(req.getParameter("user"));
-		pj.setAccept(req.getParameter("accept"));
-		pj.setListID(req.getParameter("ListId"));
-		//			pj.setLongi(req.getParameter("long"));
+		for (Entity e: reqids){
+			if (e.getProperty("reqID").toString().equals(req.getParameter("reqID"))) {
+				exist = true;
+				for(Entity ent: listUsers){
+					if (e.getProperty("ListId").equals(ent.getProperty("ListId"))){
+						if (req.getParameter("user").equals(ent.getProperty("user"))){
 
-		pj.upData();
+							user = e.getProperty("user").toString();
+							isOwner = true;
+							break;
 
+						}
+						else {
+							errorname = "Unauthorized access";
+							break;
+						}
+					}
+				}
+			}
+			else if (!e.getProperty("reqID").toString().equals(req.getParameter("reqID"))){
+				errorname = "reqID used";
+				break;
+			}
+		}
 
-		PrintWriter out = resp.getWriter();
-		String title = "RequestPost_Response" ;
-		out.println(
+		if(isOwner){
 
-				"{"+  "\"" + title +"\"" +  ":   { \n" +
+			r.setAccept((req.getParameter("accept")));
+			r.setListID(req.getParameter("ListId"));
+			r.setReqID(req.getParameter("reqID"));
+			r.setUser(user);
+			r.upData();
+
+			PrintWriter out = resp.getWriter();
+			String title = "Accept_RequestResponse" ;
+			out.println(
+
+					"{"+  "\"" + title + "\"" +  ":   { \n" +
 
 		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
 		  		    		   "} }"
 
-				);
+					);
+		}
+		else if (!exist){
+			r.setReqID(req.getParameter("reqID"));
+			r.setUser(req.getParameter("user"));
+			//r.setAccept(req.getParameter("accept"));
+			r.setListID(req.getParameter("ListId"));
+
+			r.upData();
 
 
+			PrintWriter out = resp.getWriter();
+			String title = "Post_RequestResponse" ;
+			out.println(
+
+					"{"+  "\"" + title + "\"" +  ":   { \n" +
+
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
+		  		    		   "} }"
+
+					);
+
+		}
+		else{
+			PrintWriter out = resp.getWriter();
+			String title = "Post_RequestResponse" ;
+			out.println(
+
+					"{"+  "\"" + title +"\"" +  ":   { \n" +
+
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail: " + errorname + " "  + "\"" + "\n"  + 
+		  		    		   "} }"
+
+					);
+		}
 	}
 
 }
