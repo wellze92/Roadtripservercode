@@ -28,6 +28,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <servlet-name>Comment</servlet-name>
 	    <servlet-class>com.inno.innowebservices.CommentSer</servlet-class>
 	</servlet>
+	<servlet>
+	    <servlet-name>Count</servlet-name>
+	     <servlet-class>com.inno.innowebservices.count</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>goat</servlet-name>
@@ -49,6 +53,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <servlet-name>Comment</servlet-name>
 	    <url-pattern>/com</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>Count</servlet-name>
+	    <url-pattern>/count</url-pattern>
+	</servlet-mapping>
+	
 	<servlet-mapping>
 	    <servlet-name>GPS</servlet-name>
 	    <url-pattern>/location</url-pattern>
