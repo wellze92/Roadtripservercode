@@ -129,7 +129,8 @@ public class ListingServlet extends HttpServlet {
 		}
 
 		if(!exist || isUser){
-			pj.setId(req.getParameter("id"));
+			pj.setId((req.getParameter("id")));
+			
 			pj.setUser(req.getParameter("user"));
 			pj.setOrigin(req.getParameter("origin"));
 			pj.setDestination(req.getParameter("destination"));

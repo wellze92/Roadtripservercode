@@ -42,7 +42,7 @@ public class count extends HttpServlet {
 	 
 			
 		}
-	
+	String c = 	new String ("" + count);
 	
 	
 			 PrintWriter out = resp.getWriter();
@@ -55,9 +55,10 @@ public class count extends HttpServlet {
 			    						  
 					                
 					                "\t"+ "\"" + "Count" +"\"" + ": { \n" +
-					                "\t\t"+  "\"" + "count" +"\"" + ":" +  "\"" + new String(""+count) +
+					                "\t\t"+  "\"" + "count" +"\"" + ": "    + c +
+					                "\n" +
 					          
-					                "} \n"+
+					                " } \n"+
 					                "} }"
 					                
 					                
