@@ -57,7 +57,6 @@ public class Utils {
 			
 			up.setId(id.getName());
 			up.setUser(e.getProperty("user").toString());
-			up.setListingType(e.getProperty("listingType").toString());
 			up.setOrigin(e.getProperty("origin").toString());
 			up.setDestination(e.getProperty("destination").toString());
 			up.setTime(e.getProperty("time").toString());
