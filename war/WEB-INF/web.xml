@@ -17,6 +17,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>com.inno.innowebservices.UserListings</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>listingRequests</servlet-name>
+		<servlet-class>com.inno.innowebservices.ListingRequests</servlet-class>
+	</servlet>
+	<servlet>
 	    <servlet-name>test</servlet-name>
 	    <servlet-class>com.inno.innowebservices.ListingServlet</servlet-class>
 	</servlet>
@@ -44,6 +48,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>userListings</servlet-name>
 		<url-pattern>/getUserListings</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>listingRequests</servlet-name>
+		<url-pattern>/getAllRequests</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>request</servlet-name>

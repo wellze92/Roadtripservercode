@@ -178,7 +178,6 @@ public class ListingServlet extends HttpServlet {
 			HttpServletResponse resp)
 					throws ServletException, IOException {
 
-		Listing list= new Listing();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
 		/**

@@ -89,53 +89,9 @@ public class RequestServlet extends HttpServlet {
 			HttpServletResponse resp)
 					throws ServletException, IOException {
 
-
-		/*boolean exist = false;
-		boolean isOwner = false;
-		String errorname= "Request fail";
-		Request r= new Request();
-		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
-		DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
-
-		Query q = new Query("ListId");
-		PreparedQuery p = dstore.prepare(q);
-
-		Query q1 = new Query("reqID");
-		PreparedQuery p1 = ds.prepare(q1);
-
-		for (Entity e : p1.asIterable()){
-			if (req.getParameter("reqID").equals(e.getProperty("reqID"))){
-				for (Entity d: p.asIterable()){
-					if (e.getProperty("ListId").equals(d.getProperty("ListId"))){
-						isOwner = true;
-						break;
-					}
-
-				}
-			} else if (!req.getParameter("reqID").equals(e.getProperty("reqID"))){
-				errorname = "Unauthorized access.";
-				exist = true;
-				break;
-			}
-		}
-
-		for (Entity d: p.asIterable()){
-			if (d.getProperty("ListId").toString().equals(req.getParameter("ListId"))) {
-				if(d.getProperty("user").toString().equals(req.getParameter("user"))){
-					isOwner = true;
-					break;
-				}
-				else if (!d.getProperty("user").toString().equals(req.getParameter("user"))){
-					errorname = "Unauthorized access.";
-					exist = true;
-					break;
-				}
-			}
-		}*/
-
 		boolean exist = false;
 		boolean isOwner = false;
-		String errorname= "";
+		String errorname= "Unauthorized overwrite.";
 		Request r= new Request();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 		Filter f1 = new FilterPredicate("reqID", FilterOperator.EQUAL, req.getParameter("reqID"));
@@ -201,7 +157,6 @@ public class RequestServlet extends HttpServlet {
 		else if (!exist){
 			r.setReqID(req.getParameter("reqID"));
 			r.setUser(req.getParameter("user"));
-			//r.setAccept(req.getParameter("accept"));
 			r.setListID(req.getParameter("ListId"));
 
 			r.upData();
