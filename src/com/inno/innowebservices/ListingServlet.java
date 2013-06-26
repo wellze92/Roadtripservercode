@@ -130,7 +130,6 @@ public class ListingServlet extends HttpServlet {
 
 		if(!exist || isUser){
 			pj.setId((req.getParameter("id")));
-			
 			pj.setUser(req.getParameter("user"));
 			pj.setOrigin(req.getParameter("origin"));
 			pj.setDestination(req.getParameter("destination"));
@@ -179,10 +178,6 @@ public class ListingServlet extends HttpServlet {
 			HttpServletResponse resp)
 					throws ServletException, IOException {
 
-		//		boolean exist = false;
-		//		boolean isUser = false;
-		//		String errorname= "";
-		Listing list= new Listing();
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
 		/**
