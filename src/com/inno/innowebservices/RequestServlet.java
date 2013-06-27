@@ -108,19 +108,35 @@ public class RequestServlet extends HttpServlet {
 		Query q2 = new Query("Listid");
 		q2.setFilter(f2);
 		Iterable<Entity> listUsers = dstore.prepare(q2).asIterable();
+		
 		String user = "";
-
+		int seats = 0;
+		String s = "";
+		
 		for (Entity e: reqids){
 			if (e.getProperty("reqID").toString().equals(req.getParameter("reqID"))) {
 				exist = true;
 				for(Entity ent: listUsers){
 					if (e.getProperty("ListId").equals(ent.getProperty("ListId"))){
 						if (req.getParameter("user").equals(ent.getProperty("user"))){
-
-							user = e.getProperty("user").toString();
-							isOwner = true;
-							break;
-
+							if (req.getParameter("accept").equals("true")){
+								seats = Integer.parseInt(ent.getProperty("seats").toString());
+								if (seats < 0){
+									errorname = "No more seats available";
+									break;
+								}
+								else if (seats > 0){
+									Key k = KeyFactory.createKey("Listid", req.getParameter("ListId"));
+									Listing list = Utils.getListing(k);
+									
+									user = e.getProperty("user").toString();
+									isOwner = true;
+									--seats; s = ""+seats;
+									list.setSeats(s);
+									list.upData();
+									break;
+								}
+							}
 						}
 						else {
 							errorname = "Unauthorized access";
@@ -149,7 +165,7 @@ public class RequestServlet extends HttpServlet {
 
 					"{"+  "\"" + title + "\"" +  ":   { \n" +
 
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "successful: " +"\"" + "\n"  + 
 		  		    		   "} }"
 
 					);
