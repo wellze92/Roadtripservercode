@@ -72,7 +72,7 @@ public class ListingServlet extends HttpServlet {
 
 							"\t\t"+ "\"" + "SharedDriving" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Image1" +"\"" + ":" + "\"" + list.getImage1() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + list.getImage2() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + list.getImage2() + "\"" +  " \n" +
 
 							"} \n"+
 							"} }"
