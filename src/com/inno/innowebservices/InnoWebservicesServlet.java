@@ -75,7 +75,7 @@ public class InnoWebservicesServlet extends HttpServlet {
 				                
 		    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
 		    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail" +"\"" + "\n"  + 
 							   "} }"
 				                
 				                );

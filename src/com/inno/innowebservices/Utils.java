@@ -71,6 +71,7 @@ public class Utils {
 			up.setSharedDriving(e.getProperty("sharedDriving").toString());
 			up.setImage1(e.getProperty("image1").toString());
 			up.setImage2(e.getProperty("image2").toString());
+			up.setListingComment(e.getProperty("listcomment").toString());
 						
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block

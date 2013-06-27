@@ -72,7 +72,8 @@ public class ListingServlet extends HttpServlet {
 
 							"\t\t"+ "\"" + "SharedDriving" +"\"" + ":" + "\"" + list.getSharedDriving() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Image1" +"\"" + ":" + "\"" + list.getImage1() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + list.getImage2() +"\"" + "\n" +
+							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + list.getImage2() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Comments" +"\"" + ":" + "\"" + list.getListingComment() +"\"" + "\n" +
 
 							"} \n"+
 							"} }"
@@ -144,7 +145,7 @@ public class ListingServlet extends HttpServlet {
 			pj.setSharedDriving(req.getParameter("sharedDriving"));
 			pj.setImage1(req.getParameter("image1"));
 			pj.setImage2(req.getParameter("image2"));
-
+			pj.setListingComment(req.getParameter("listcomment"));
 			pj.upData();
 
 
@@ -221,7 +222,8 @@ public class ListingServlet extends HttpServlet {
 							"\t\t"+ "\"" + "Bags" +"\"" + ":" + "\"" + e.getProperty("bags").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "SharedDriving" +"\"" + ":" + "\"" + e.getProperty("sharedDriving").toString() +"\"" + ", \n" +
 							"\t\t"+ "\"" + "Image1" +"\"" + ":" + "\"" + e.getProperty("image1").toString() +"\"" + ", \n" +
-							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + e.getProperty("image2").toString() +"\"" + "\n" +
+							"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + e.getProperty("image2").toString() +"\"" + ", \n" +
+							"\t\t"+ "\"" + "Comments" +"\"" + ":" + "\"" + e.getProperty("listcomment").toString() +"\"" + "\n" +
 							"} \n"
 					);
 
