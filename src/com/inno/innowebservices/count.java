@@ -32,7 +32,7 @@ public class count extends HttpServlet {
 		/**
 		 * Checking to see if the listing actually exists in the database
 		 */
-		Query q = new Query("Commentid");
+		Query q = new Query("Listid");
 		PreparedQuery p = dstore.prepare(q);
 		String comments = "";
 
