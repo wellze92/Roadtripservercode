@@ -77,6 +77,7 @@ public class UserListings extends HttpServlet {
 									"\t\t"+ "\"" + "SharedDriving" +"\"" + ":" + "\"" + e.getProperty("sharedDriving").toString() +"\"" + ", \n" +
 									"\t\t"+ "\"" + "Image1" +"\"" + ":" + "\"" + e.getProperty("image1").toString() +"\"" + ", \n" +
 									"\t\t"+ "\"" + "Image2" +"\"" + ":" + "\"" + e.getProperty("image2").toString() +"\"" + ", \n" +
+									"\t\t"+ "\"" + "Comments" +"\"" + ":" + "\"" + e.getProperty("listcomment").toString() +"\"" + "\n" +
 									"\t} \n"
 							);
 				}

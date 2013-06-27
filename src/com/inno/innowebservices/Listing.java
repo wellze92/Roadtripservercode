@@ -20,6 +20,7 @@ public class Listing {
 	private String sharedDriving;
 	private String image1;
 	private String image2;
+	private String listingComment;
 	
 		
 	public String getImage1() {
@@ -121,6 +122,7 @@ public class Listing {
 		listing.setProperty("sharedDriving", sharedDriving);
 		listing.setProperty("image1", image1);
 		listing.setProperty("image2", image2);
+		listing.setProperty("listcomment", listingComment);
 
 		Utils.updateListing(listing);
 		return true;
@@ -136,6 +138,12 @@ public class Listing {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public String getListingComment() {
+		return listingComment;
+	}
+	public void setListingComment(String listingComment) {
+		this.listingComment = listingComment;
 	}
 	
 }

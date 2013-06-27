@@ -15,8 +15,16 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * 
+ * @author Andrew Wells
+ * Returns the number of listings in the server so the next id can be unique
+ */
 public class count extends HttpServlet {
 
+	/**
+	 * Gets the number of listings in the server
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");

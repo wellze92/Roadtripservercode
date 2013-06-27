@@ -15,9 +15,17 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * 
+ * @author Andrew Wells
+ * Handles and manages the http request to do with locations. It allows the user to store a location or to the most recent location 
+ * related to one listing
+ */
 public class LocationServ extends HttpServlet {
 
-	
+	/**
+	 * Gets the most recent location
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -30,9 +38,7 @@ public class LocationServ extends HttpServlet {
 		
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
-		/**
-		 * Checking to see if the listing actually exists in the database
-		 */
+	
 		Query q = new Query("id");
 		PreparedQuery p = dstore.prepare(q);
 //
@@ -67,7 +73,9 @@ public class LocationServ extends HttpServlet {
 		
 		
 	}
-
+/**
+ * Adds a location to the server 
+ */
 	public void doPost(HttpServletRequest req,
 			HttpServletResponse resp)
 					throws ServletException, IOException {

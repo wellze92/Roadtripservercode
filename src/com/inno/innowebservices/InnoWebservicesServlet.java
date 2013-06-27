@@ -26,7 +26,15 @@ import com.google.appengine.api.datastore.Query;
 
 
 @SuppressWarnings("serial")
+/**
+ * Registers the user ( by storing the data in the database), getting the information and allowing to add a rating
+ * @author Andrew Wells
+ *
+ */
 public class InnoWebservicesServlet extends HttpServlet {
+	/**
+	 * Returns the information of a user. Used to log into the server
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -75,7 +83,7 @@ public class InnoWebservicesServlet extends HttpServlet {
 				                
 		    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
 		    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail		" +"\"" + "\n"  + 
+		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail" +"\"" + "\n"  + 
 							   "} }"
 				                
 				                );
@@ -84,7 +92,9 @@ public class InnoWebservicesServlet extends HttpServlet {
 	  
 		    
 	}
-	
+	/**
+	 * Registers the user to the server
+	 */
 	public void doPost(HttpServletRequest req,
               HttpServletResponse resp)
 throws ServletException, IOException {
@@ -176,7 +186,9 @@ throws ServletException, IOException {
 				                );
 		  }
 }
-	
+	/**
+	 * Make a new rating for a user and finds the average rating for that user
+	 */
 	public void doPut(HttpServletRequest req,
             HttpServletResponse resp)
 throws ServletException, IOException {

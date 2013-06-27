@@ -18,7 +18,12 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-
+/**
+ * Gets the user details matched to the code without having to pass a password
+ * NOT USED IN FINAL BUILD
+ * @author Andrew Wells
+ *
+ */
 public class UserQuery extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -98,22 +103,6 @@ public class UserQuery extends HttpServlet {
 		    
 	}
 	
-	public void doPost(HttpServletRequest req,
-              HttpServletResponse resp)
-throws ServletException, IOException {
-		boolean error = false;
-		
-			  PrintWriter out = resp.getWriter();
-			    String title = "Register_response" ;
-			    out.println(
-			                
-			    		  "{"+  "\"" + title +"\"" +  ":   { \n" +
-				    				
-		  		    		   "\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "fail " + " "  + "\"" + "\n"  + 
-							   "} }"
-				                
-				                );
-		  
-}
+
 	
 }

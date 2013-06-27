@@ -7,15 +7,22 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
-
+/**Adds information into the database and
+ * Gets the information from the database and turns it into the object
+ * @author Andrew Wells, Micah Cinco
+ *
+ */
 public class Utils {
+
 
 	private static DatastoreService ds = DatastoreServiceFactory.getDatastoreService();
 	private static DatastoreService list = DatastoreServiceFactory.getDatastoreService();
 	
+	// puts the information in the database
 	public static void updateEntity (Entity e){
 		ds.put(e);
 	}
+	// gets a user
 	public static UserPojo getEntity(Key id){
 		UserPojo up = new UserPojo();
 		try {
@@ -71,6 +78,7 @@ public class Utils {
 			up.setSharedDriving(e.getProperty("sharedDriving").toString());
 			up.setImage1(e.getProperty("image1").toString());
 			up.setImage2(e.getProperty("image2").toString());
+			up.setListingComment(e.getProperty("listcomment").toString());
 						
 		} catch (EntityNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -79,7 +87,7 @@ public class Utils {
 		return up;
 	}
 	
-	
+	// gets a location
 	public static Location getLocation(Key id){
 		Location up = new Location();
 		try {
@@ -98,6 +106,7 @@ public class Utils {
 		}
 		return up;
 	}
+	
 	public static void updateLocation (Entity e){
 		list.put(e);
 	}
@@ -122,6 +131,7 @@ public class Utils {
 		return up;
 	}
 	
+	// gets a comment
 	public static Comment getComment(Key id){
 		Comment up = new Comment();
 		try {

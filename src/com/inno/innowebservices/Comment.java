@@ -2,16 +2,26 @@ package com.inno.innowebservices;
 
 import com.google.appengine.api.datastore.Entity;
 
+
+/**
+ * 
+ * @author Andrew Wells
+ * A comment is a string which is attached to a listing with the user id
+ *
+ */
 public class Comment {
 
 	private String id;
 	private String user;
 	private String comment;
 	
-	
+	/**
+	 * Uploads the comment to the server
+	 * @return
+	 */
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
-		Entity listing = new Entity("Commentid",id + comment + user);
+		Entity listing = new Entity("Commentid",id + comment + user); // HACK: Easy way to make unique. Means a user can make more then one comment on the listing 
 		
 		
 		listing.setProperty("ListId", id);

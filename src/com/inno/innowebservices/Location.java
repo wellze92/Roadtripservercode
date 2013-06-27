@@ -1,7 +1,11 @@
 package com.inno.innowebservices;
 
 import com.google.appengine.api.datastore.Entity;
-
+/**
+ * 
+ * @author Andrew Wells
+ * Stores the last location of the trip on the server
+ */
 public class Location {
 	private String id;
 	private String user;		
@@ -10,8 +14,10 @@ public class Location {
 	private String lata;
 
 	
-	
-
+	/**
+	 * Uploads the location to the server
+	 * @return
+	 */
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
 		Entity loc = new Entity("CurListid",id);

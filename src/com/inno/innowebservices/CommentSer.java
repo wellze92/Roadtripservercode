@@ -16,23 +16,25 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * Handles and manages the http request to do with comments. It allows the user to make a comment or to get all of the comments
+ * related to one listing
+ * @author Andrew Wells
+ *
+ */
 public class CommentSer extends HttpServlet {
 	
-
+/**
+ * Deals with get request and returns all of the comments in a json format
+ */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
-
-		String comment = req.getParameter("id");
-		
-		Key k = KeyFactory.createKey("Commentid", comment);
-		Comment list = Utils.getComment(k);
-		
 		
 		DatastoreService dstore = DatastoreServiceFactory.getDatastoreService();
 
 		/**
-		 * Checking to see if the listing actually exists in the database
+		 *Gets all of the comments from the server
 		 */
 		Query q = new Query("Commentid");
 		PreparedQuery p = dstore.prepare(q);
@@ -40,15 +42,16 @@ public class CommentSer extends HttpServlet {
 
 	for (Entity e: p.asIterable()){
 			if (e.getProperty("ListId").equals(req.getParameter("id"))){
+				// adds to the comment array
 				comments = comments + "\t\t"+  "\"" + "comment" +"\"" + ":" +  "\"" + e.getProperty("comment") +"\"" + ", \n";
 			}
 	 
 			
 		}
 		
-	comments = comments.substring(0,comments.length()-3) + "\n";
+	comments = comments.substring(0,comments.length()-3) + "\n"; // to keep JSON format
 	
-	
+		// response to the client after 
 			 PrintWriter out = resp.getWriter();
 			    String title = "Comment_Get";
 			    
@@ -57,7 +60,7 @@ public class CommentSer extends HttpServlet {
 			    				  "{"+  "\"" + title +"\"" +  ":   { \n" +
 			    				"\t"+  "\"" + "status" +"\"" + ":" +  "\"" + "success" +"\"" + ", \n"  +
 			    						  
-					                
+					                // all comments in the form of an array
 					                "\t"+ "\"" + "Comments" +"\"" + ": { \n" +
 					                comments +
 					          
@@ -69,7 +72,9 @@ public class CommentSer extends HttpServlet {
 		
 		
 	}
-
+ /**
+  * Adds a comment to the server and links to the listing
+  */
 	public void doPost(HttpServletRequest req,
 			HttpServletResponse resp)
 					throws ServletException, IOException {

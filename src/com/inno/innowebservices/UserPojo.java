@@ -3,6 +3,12 @@ package com.inno.innowebservices;
 import com.google.appengine.api.datastore.Blob;
 import com.google.appengine.api.datastore.Entity;
 
+
+/**
+ * All of the detais linked to a user
+ * @author Andrew Wells
+ *
+ */
 public class UserPojo {
 	
 	private String name;		
@@ -102,6 +108,9 @@ public class UserPojo {
 	}
 	
 	public boolean upData(){
+		/**
+		 * Uploads it to the database
+		 */
 Entity user = new Entity("id",name);
 		
 		user.setProperty("username", name);
