@@ -19,10 +19,19 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
+/**
+ * Servlet that handles HTTP requests to do with the request object.
+ * Allows one to create a request and view it.
+ * 
+ * @author Micah Cinco
+ *
+ */
 @SuppressWarnings("serial")
 public class RequestServlet extends HttpServlet {
 
-
+	/**
+	 * Handles GET requests that allows user to view the request.
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -85,6 +94,10 @@ public class RequestServlet extends HttpServlet {
 
 	}
 
+	/**
+	 * Handles POST requests that allows a user to create a request (if it doesn't already exist),
+	 * or accept a request (change accept -> true if user is the listing owner)
+	 */
 	public void doPost(HttpServletRequest req,
 			HttpServletResponse resp)
 					throws ServletException, IOException {
@@ -98,7 +111,7 @@ public class RequestServlet extends HttpServlet {
 		Filter f2 = new FilterPredicate("user", FilterOperator.EQUAL, req.getParameter("user"));
 
 		/**
-		 * Checking to see if the listing id already exists in the database
+		 * Querying two different datastore tables 
 		 */
 		Query q1 = new Query("reqID");
 		q1.setFilter(f1);

@@ -13,9 +13,17 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * HTTP Servlet that handles HTTP Requests and allows the user to view all requests currently
+ * made on a particular listing.
+ * 
+ * @author Micah Cinco
+ * 
+ */
 @SuppressWarnings("serial")
 public class ListingRequests extends HttpServlet {
 
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");

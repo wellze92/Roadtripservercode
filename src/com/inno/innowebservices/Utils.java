@@ -57,6 +57,12 @@ public class Utils {
 	public static void updateListing (Entity e){
 		list.put(e);
 	}
+	
+	/**
+	 * Returns the specified Listing
+	 * @param id
+	 * @return
+	 */
 	public static Listing getListing(Key id){
 		Listing up = new Listing();
 		try {
@@ -114,6 +120,12 @@ public class Utils {
 	public static void updateRequest (Entity e){
 		list.put(e);
 	}
+	
+	/**
+	 * Returns the specified Request.
+	 * @param id
+	 * @return
+	 */
 	public static Request getRequest(Key id){
 		Request up = new Request();
 		try {

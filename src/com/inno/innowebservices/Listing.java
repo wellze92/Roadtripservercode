@@ -3,6 +3,13 @@ package com.inno.innowebservices;
 
 import com.google.appengine.api.datastore.Entity;
 
+/**
+ * Listing object that represents a Listing and its values. 
+ * 
+ * @author Micah Cinco
+ * @version 1
+ *
+ */
 public class Listing {
 
 	private String id;
@@ -102,7 +109,9 @@ public class Listing {
 		this.sharedDriving = sharedDriving;
 	}
 	
-
+	/**
+	 * Method that updates one listing's values
+	 */
 	public boolean upData(){
 		//Entity user = new Entity("id",name);
 		Entity listing = new Entity("Listid",id);

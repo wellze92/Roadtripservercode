@@ -2,6 +2,14 @@ package com.inno.innowebservices;
 
 import com.google.appengine.api.datastore.Entity;
 
+/**
+ * Requests Object that gets created every time a user requests for a seat in a trip.
+ * If the owner of the listing is the user, then they are authorized to change the accept
+ * variable, "true".
+ * 
+ * @author Micah Cinco
+ *
+ */
 public class Request {
 	
 	private String accept = "false";

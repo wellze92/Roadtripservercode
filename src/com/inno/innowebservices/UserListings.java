@@ -13,6 +13,12 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * Servlet that handles HTTP requests that will allow one to view a given user's current listings.
+ * 
+ * @author Micah Cinco
+ *
+ */
 @SuppressWarnings("serial")
 public class UserListings extends HttpServlet {
 

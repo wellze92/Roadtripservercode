@@ -16,9 +16,18 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 
+/**
+ * Handles HTTP Reqyests for Listings - Create a listing, viewing a listing and viewing all existing listings.
+ * 
+ * @author Micah Cinco
+ * 
+ */
 @SuppressWarnings("serial")
 public class ListingServlet extends HttpServlet {
 
+	/**
+	 * GET request that will view a specified listing depending on its listID.
+	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -99,7 +108,11 @@ public class ListingServlet extends HttpServlet {
 		}
 
 	}
-
+	
+	/**
+	 * POST request that handles requests to create or edit a listing. 
+	 * The user is entitiled to overwrite or edit their listing if exams are over.
+	 */
 	public void doPost(HttpServletRequest req,
 			HttpServletResponse resp)
 					throws ServletException, IOException {
@@ -175,7 +188,9 @@ public class ListingServlet extends HttpServlet {
 		}
 	}
 
-
+	/**
+	 * Method that handles PUT requests and allows user to view all currently existing listings.
+	 */
 	public void doPut(HttpServletRequest req,
 			HttpServletResponse resp)
 					throws ServletException, IOException {
